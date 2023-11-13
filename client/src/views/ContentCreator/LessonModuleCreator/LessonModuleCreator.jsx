@@ -109,7 +109,6 @@ export default function LessonModuleCreator({
 
   return (
     <div>
-        {/*Editied to no longer show as button on new tab for teacher, now is just a form*/}
         <Form
           id="add-lesson-module"
           labelCol={{
