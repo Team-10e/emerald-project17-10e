@@ -5,7 +5,7 @@ import React, { useState } from "react"
 import { CSVReader } from "react-papaparse"
 import { addStudent, addStudents } from "../../../../../Utils/requests"
 import "./AddStudents.less"
-//import emoji from "emoji-dictionary";
+import emoji from "emoji-dictionary";
 
 export default function AddStudents({ classroomId, addStudentsToTable }) {
   const [name, setName] = useState("")
