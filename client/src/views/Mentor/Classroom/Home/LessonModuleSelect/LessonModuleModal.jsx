@@ -7,6 +7,7 @@ import {
   getLessonModuleActivities,
 } from '../../../../../Utils/requests';
 import { useSearchParams } from 'react-router-dom';
+import UnitCreator from '../../../../ContentCreator/UnitEditor/UnitEditor';
 
 export default function LessonModuleModal({
   setActiveLessonModule,
@@ -14,6 +15,7 @@ export default function LessonModuleModal({
   classroomId,
   viewing,
   setActivities,
+  gradelist,
 }) {
   const [visible, setVisible] = useState(false);
   const [activePanel, setActivePanel] = useState('panel-1');
@@ -55,7 +57,7 @@ export default function LessonModuleModal({
 
   const handleOk = async () => {
     const res = await setSelection(classroomId, selected.id);
-    if (res.err) {
+    if (res.err) { 
       message.error(res.err);
     } else {
       setActiveLessonModule(selected);

@@ -109,17 +109,7 @@ export default function LessonModuleCreator({
 
   return (
     <div>
-      <button onClick={showModal} id="add-lesson-module-btn">
-        + Add a Lesson
-      </button>
-
-      <Modal
-        title="Create a Lesson"
-        open={visible}
-        width="35vw"
-        onCancel={handleCancel}
-        footer={null}
-      >
+        {/*Editied to no longer show as button on new tab for teacher, now is just a form*/}
         <Form
           id="add-lesson-module"
           labelCol={{
@@ -227,7 +217,6 @@ export default function LessonModuleCreator({
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
 
       {!visible ? (
         <ActivityEditor

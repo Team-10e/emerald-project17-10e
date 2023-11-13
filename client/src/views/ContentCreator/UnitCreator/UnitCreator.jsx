@@ -35,16 +35,7 @@ export default function UnitCreator({ gradeList }) {
 
   return (
     <div>
-      <button onClick={showModal} id="add-unit-btn">
-        + Add Unit
-      </button>
-      <Modal
-        title="Create Unit"
-        open={visible}
-        width="35vw"
-        onCancel={handleCancel}
-        footer={null}
-      >
+
         <Form
           id="add-units"
           labelCol={{
@@ -135,7 +126,7 @@ export default function UnitCreator({ gradeList }) {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      
     </div>
   )
 }

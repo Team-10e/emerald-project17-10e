@@ -2,6 +2,7 @@ import { Button, Form, Input, message, Modal } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
+  deleteLessonModule,
   getActivity,
   getActivityToolbox,
   getActivityToolboxAll,
@@ -10,6 +11,7 @@ import {
 } from "../../../../Utils/requests"
 import "../../../ContentCreator/ActivityEditor/ActivityEditor.less"
 import ActivityComponentTags from "../../../ContentCreator/ActivityEditor/components/ActivityComponentTags"
+import { deleteActivity } from "../../../../Utils/requests"
 
 const SCIENCE = 1
 const MAKING = 2
@@ -34,7 +36,8 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -148,6 +151,7 @@ const MentorActivityDetailModal = ({
     setVisible(true)
     //setOpen(true)
 };
+//this is the page for delete lessons
   return (
     <div id="mentoredit">
     <Button id="view-activity-button"
@@ -190,7 +194,7 @@ const MentorActivityDetailModal = ({
           ></Input.TextArea>
         </Form.Item>
 
-        <Form.Item id="form-label" label="StandardS">
+        <Form.Item id="form-label" label="Standards">
           <Input
             onChange={e => setStandardS(e.target.value)}
             value={StandardS}
@@ -295,6 +299,7 @@ const MentorActivityDetailModal = ({
           </Button>
         </Form.Item>
       </Form>
+      <Button id="delete-activity" onClick={() => deleteActivity(selectActivity.id)}>Delete</Button>
     </Modal>
     </div>
   )

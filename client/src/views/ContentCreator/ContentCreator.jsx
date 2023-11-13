@@ -13,16 +13,19 @@ import {
 } from '../../Utils/requests';
 import UnitEditor from './UnitEditor/UnitEditor';
 import LessonEditor from './LessonEditor/LessonEditor';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
+
 
 import './ContentCreator.less';
 
 const { TabPane } = Tabs;
 
-export default function ContentCreator() {
+export default function ContentCreator({handleLogout,}) {
   const [gradeList, setGradeList] = useState([]);
   const [learningStandardList, setLessonModuleList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const { id } = useParams();
 
   const [tab, setTab] = useState(
     searchParams.has('tab') ? searchParams.get('tab') : 'home'
