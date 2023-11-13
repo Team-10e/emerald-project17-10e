@@ -77,11 +77,9 @@ export default function Classroom({
             classroomId={id}
           />
         </TabPane>
-        {/*this is a comment*/} 
         <TabPane tab="Create Unit" key="create-unit">
           <UnitCreator gradeList={gradeList}></UnitCreator>
-        </TabPane>
-        
+        </TabPane> 
         <TabPane tab="Create Lesson" key="create-lesson">
             <LessonModuleCreator setLessonModuleList={learningStandardList}></LessonModuleCreator>
         </TabPane>
