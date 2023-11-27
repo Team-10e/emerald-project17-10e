@@ -108,6 +108,7 @@ export default function Home({ classroomId, viewing }) {
                   setActivities={setActivities}
                 />
               </div>
+
               <p id='lesson-module-expectations'>{`Expectations: ${activeLessonModule.expectations}`}</p>
              {activeLessonModule.link ? (
                 <p>
@@ -239,6 +240,8 @@ export default function Home({ classroomId, viewing }) {
                   ))}
                 </div>
               ) : null}
+
+
             </div>
           ) : (
             <div>

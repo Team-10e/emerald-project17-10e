@@ -39,8 +39,7 @@
   textarea {
     display: block;
     margin: 5px auto 0px;
-    background: gray;
-    border: 1px solid;
+    background: #colors[tertiary];
     border-color: #colors[secondary];
     padding: 10px 10px;
     width: 95%;
@@ -48,6 +47,10 @@
     color: #colors[text-primary];
     border-radius: 4px;
     transition: 0.25s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+  }
+  ::placeholder{
+    color: #colors[text-primary];
   }
 
   input[type='text']:focus {
@@ -57,21 +60,23 @@
   label {
     margin: 10px auto 12px;
     white-space: pre-wrap;
+    color: #colors[secondary];
+    font-weight: bold;
   }
 }
 
 #unit-name-dropdown {
   display: block;
-  background: gray;
+  background: #colors[tertiary];
   margin: 5px auto 0px;
-  border: 1px solid;
   border-color: #colors[secondary];
   padding: 14px 10px;
   width: 95%;
   outline: none;
-  color: white;
+  color: #colors[text-primary];
   border-radius: 4px;
   transition: 0.25s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
 }
 
 #unit:focus {
@@ -81,4 +86,16 @@
 #link-Input {
   white-space: pre-wrap;
   margin-bottom: 20px;
+}
+
+#content-creator-button {
+  margin: 0px 5px;
+  width: 8vw;
+  background-color: #colors[quaternary];
+  color: #colors[text-primary];
+  transition: background-color 0.15s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+  &:hover {
+    background: #colors[quinary];
+  }
 }

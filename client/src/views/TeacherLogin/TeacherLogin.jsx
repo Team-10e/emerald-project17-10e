@@ -59,7 +59,7 @@ export default function TeacherLogin() {
           <input
             type='email'
             {...email}
-            placeholder='Email'
+            placeholder='Email/Username'
             autoComplete='username'
           />
           <input

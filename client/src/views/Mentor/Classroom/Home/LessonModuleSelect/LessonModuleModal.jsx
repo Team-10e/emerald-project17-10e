@@ -96,11 +96,11 @@ export default function LessonModuleModal({
           >
             {activePanel === 'panel-1'
               ? 'Review'
-              : 'Set as Active Learning Standard'}
+              : 'Edit'}
           </Button>,
         ]}
       >
-        <LessonModuleSelect
+      <LessonModuleSelect
           activePanel={activePanel}
           setActivePanel={setActivePanel}
           selected={selected}
@@ -108,8 +108,9 @@ export default function LessonModuleModal({
           gradeId={gradeId}
           activities={selectedActivities}
           setActivities={setSelectedActivities}
-        />
+        />   
       </Modal>
+      
     </div>
   );
 }

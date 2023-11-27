@@ -35,6 +35,10 @@ export default function UnitCreator({ gradeList }) {
 
   return (
     <div>
+      <div id="page-header">
+        <h2 className="helper">Add a New Unit</h2>
+      </div>
+    <div id="div-style">
         <Form
           id="add-units"
           labelCol={{
@@ -109,23 +113,22 @@ export default function UnitCreator({ gradeList }) {
             style={{ marginBottom: "0px" }}
           >
             <Button
-              type="primary"
               htmlType="submit"
               size="large"
-              className="content-creator-button"
+              id="content-creator-button"
             >
               Submit
             </Button>
             <Button
               onClick={handleCancel}
               size="large"
-              className="content-creator-button"
+              id="content-creator-button"
             >
               Cancel
             </Button>
           </Form.Item>
         </Form>
-      
+        </div> 
     </div>
   )
 }

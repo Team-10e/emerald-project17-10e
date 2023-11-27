@@ -109,6 +109,10 @@ export default function LessonModuleCreator({
 
   return (
     <div>
+      <div id="page-header">
+        <h2 className="helper">Add a New Lesson</h2>
+      </div>
+    <div id="div-style">
         <Form
           id="add-lesson-module"
           labelCol={{
@@ -181,7 +185,7 @@ export default function LessonModuleCreator({
               placeholder="Enter lesson Standards"
             />
           </Form.Item>
-          <Form.Item label="Link to Additional Resource (Optional)">
+          <Form.Item label="Additional Resources (Optional)">
             <Input
               onChange={e => {
                 setLink(e.target.value)
@@ -200,17 +204,16 @@ export default function LessonModuleCreator({
             style={{ marginBottom: "0px" }}
           >
             <Button
-              type="primary"
               htmlType="submit"
               size="large"
-              className="content-creator-button"
+              id="content-creator-button"
             >
-              Next
+              Submit
             </Button>
             <Button
               onClick={handleCancel}
               size="large"
-              className="content-creator-button"
+              id="content-creator-button"
             >
               Cancel
             </Button>
@@ -226,6 +229,7 @@ export default function LessonModuleCreator({
           tab={"home"}
         />
       ) : null}
+    </div>
     </div>
   )
 }
