@@ -3,6 +3,8 @@ import { Form, Input, Popconfirm, Switch, Table } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import StudentModal from './StudentModal';
 import Picker from 'emoji-picker-react';
+import { updateStudent, updateStudentGroup } from '../../../../Utils/requests';
+import { message } from 'antd';
 
 export default function ListView(props) {
   const {
@@ -108,6 +110,26 @@ export default function ListView(props) {
   const clearState = () => {
     setChosenCharacter('');
     setPickerVisible(false);
+  };
+  const handleGroupAssignment = async (record) => {
+    const groupNumberInput = prompt(`Enter group number for ${record.name}:`);
+    const groupNumber = parseInt(groupNumberInput);
+    if (!isNaN(groupNumber) && Number.isInteger(groupNumber)) {
+      const updatedStudent = {
+        ...record,
+        groupNumber: groupNumber,
+      };
+      const res = await updateStudentGroup(record.key, updatedStudent);
+      if (res.data) {
+        message.success(`Successfully assigned ${res.data.name} to group ${groupNumber}.`);
+        console.log(studentData);
+      } else {
+        message.error(res.err);
+      }
+    } else {
+      alert('Please enter a valid integer for the group number.');
+    }
+    //alert("test");
   };
 
   const columns = [
@@ -241,6 +263,29 @@ export default function ListView(props) {
       ],
       filterMultiple: false,
       onFilter: (value, record) => record.enrolled.enrolled === value,
+    },
+    {
+      title: 'Group Number',
+      dataIndex: 'groupNumber',
+      key: 'groupNumber',
+      width: '10%',
+      align: 'left',
+      render: (groupNumber) => (groupNumber !== undefined ? groupNumber : '-'),
+    },
+    {
+      title: 'Assign Group',
+      dataIndex: 'assignGroup',
+      key: 'assignGroup',
+      width: '10%',
+      align: 'right',
+      render: (_, record) => (
+        <button
+          id='link-btn'
+          onClick={() => handleGroupAssignment(record)}
+        >
+          Assign Group
+        </button>
+      ),
     },
   ];
 

@@ -189,6 +189,22 @@ export const updateStudent = async (id, student) =>
     error: 'Failed to update student.',
   });
 
+  export const updateStudentGroup = async (id, groupNumber) => {
+    try {
+      const response = await makeRequest({
+        method: PUT,
+        path: `${server}/students/${id}`,
+        data: { groupNumber },
+        auth: true,
+        error: 'Failed to update student group.',
+      });
+  
+      return response;
+    } catch (error) {
+      return { err: 'Error updating student group.' };
+    }
+  };
+
 export const getUnits = async (id) =>
   makeRequest({
     method: GET,
@@ -300,7 +316,7 @@ export const getSubmission = async (submissionId, path, isAuth) =>
     error: 'Failed to retrieve submission status',
   });
 
-export const addStudent = async (name, character, classroom) =>
+export const addStudent = async (name, character, classroom, groupNumber) =>
   makeRequest({
     method: POST,
     path: `${server}/students`,
@@ -308,6 +324,7 @@ export const addStudent = async (name, character, classroom) =>
       name: name,
       character: character,
       classroom: classroom,
+      groupNumber: groupNumber,
     },
     auth: true,
     error: 'Failed to add student.',

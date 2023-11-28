@@ -20,6 +20,7 @@ module.exports = {
      * Update student enrolled attribute
      *
      * @param {Boolean} enrolled
+     * @param groupNumber
      *
      * @return {Student}
      */
@@ -56,6 +57,7 @@ module.exports = {
 
         // remove private fields and return the new student
         student.enrolled = ctx.request.body.enrolled
+        student.groupNumber = ctx.request.body.groupNumber;
         const updatedStudent = await strapi.services.student.update({id: id}, student)
         return sanitizeEntity(updatedStudent, {model: strapi.models.student})
     },
@@ -74,7 +76,8 @@ module.exports = {
                 return strapi.services.student.create({
                     name: student.name,
                     character: student.character,
-                    classroom: classroom
+                    classroom: classroom,
+                    groupNumber: groupNumber
                 })
             }))
         }
