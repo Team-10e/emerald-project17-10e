@@ -67,7 +67,7 @@ export default function AddStudents({ classroomId, addStudentsToTable }) {
   }
   function emojiFromName(name) {
     const emojiSymbol = emoji.getUnicode(name);
-    return emojiSymbol || name; // Return the symbol or the original text as a fallback
+    return emojiSymbol || null; // Return the symbol or leave blank
   }
   const handleCsvAdd = async () => {
     const students = await Promise.all(uploadedRoster.map(async student => {
@@ -77,7 +77,7 @@ export default function AddStudents({ classroomId, addStudentsToTable }) {
   
       return {
         name,
-        character: emojiSymbol || animal, // Use emoji if available, otherwise use the original name
+        character: emojiSymbol || null, // Use emoji if available, otherwise leave blank
       };
     }));
   
