@@ -1,7 +1,7 @@
-import { Modal, Button } from 'antd';
+import { Modal, Button, Checkbox } from 'antd';
 import React, { useState } from 'react';
 
-export default function StudentModal({ linkBtn, student, getFormattedDate }) {
+export default function ClassroomsModal({ linkBtn, student }) {
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -19,10 +19,9 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
   return (
     <div>
       <button id={linkBtn ? 'link-btn' : null} onClick={showModal}>
-        {student.name}
+        Classrooms
       </button>
       <Modal
-        title={student.name}
         visible={visible}
         onCancel={handleCancel}
         footer={[
@@ -37,12 +36,7 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
         </div>
         <div id='modal-card-content-container'>
           <div id='description-container'>
-            <p id='label'>Last logged in:</p>
-            <p id='label-info'> {getFormattedDate(student.last_logged_in)}</p>
-            <br></br>
-          </div>
-          <div id='description-container'>
-            <p id='label'>Status:</p>
+            <p id='label'>Classrooms</p>
             <p id='label-info'>
               {student.enrolled.enrolled ? 'Enrolled' : 'Unenrolled'}
             </p>

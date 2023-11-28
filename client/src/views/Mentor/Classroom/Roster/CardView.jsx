@@ -1,5 +1,6 @@
 import React from 'react';
 import StudentModal from "./StudentModal";
+import ClassroomsModal from "./ClassroomsModal";
 
 export default function CardView(props) {
     const {studentData, onEnrollToggle, getFormattedDate} = props;
@@ -10,7 +11,9 @@ export default function CardView(props) {
             <div id='student-card' key={student.key}>
                 <div id='student-card-header'>
                     <p id='animal'>{student.character}</p>
-                    <h1 id='student-card-title'>{student.name}</h1>
+                    <h1 id='student-card-title'>
+                        <StudentModal student={student} linkBtn={true} getFormattedDate={getFormattedDate}/>
+                    </h1>
                 </div>
                 <div id='card-content-container'>
                     <div id="description-container">
@@ -24,7 +27,7 @@ export default function CardView(props) {
                     </div>
                 </div>
                 <div id='card-button-container' className='flex flex-row'>
-                    <StudentModal student={student} linkBtn={false} getFormattedDate={getFormattedDate}/>
+                    <ClassroomsModal student={student} linkBtn={false} />
                     <button onClick={() => {
                         onEnrollToggle(student.enrolled.id, !student.enrolled.enrolled)
                     }}>

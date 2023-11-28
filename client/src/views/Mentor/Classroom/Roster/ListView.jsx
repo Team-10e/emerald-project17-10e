@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Popconfirm, Switch, Table } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import StudentModal from './StudentModal';
+import ClassroomsModal from "./ClassroomsModal";
 import Picker from 'emoji-picker-react';
 import { updateStudent, updateStudentGroup } from '../../../../Utils/requests';
 import { message } from 'antd';
@@ -140,6 +141,13 @@ export default function ListView(props) {
       editable: true,
       width: '22.5%',
       align: 'left',
+      render: (_, record) => (
+        <StudentModal
+          student={record}
+          linkBtn={true}
+          getFormattedDate={getFormattedDate}
+        />
+      ),
       sorter: {
         compare: (a, b) => (a.name < b.name ? -1 : 1),
       },
@@ -164,13 +172,13 @@ export default function ListView(props) {
       render: (_, record) => getFormattedDate(record.last_logged_in),
     },
     {
-      title: 'View',
-      dataIndex: 'view',
-      key: 'view',
+      title: 'Classrooms',
+      dataIndex: 'classrooms',
+      key: 'classrooms',
       width: '10%',
       align: 'right',
       render: (_, record) => (
-        <StudentModal
+        <ClassroomsModal
           student={record}
           linkBtn={true}
           getFormattedDate={getFormattedDate}
