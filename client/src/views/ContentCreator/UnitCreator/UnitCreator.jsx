@@ -10,6 +10,9 @@ export default function UnitCreator({ gradeList }) {
   const [number, setNumber] = useState("")
   const [description, setDescription] = useState("")
   const [standard, setStandard] = useState("")
+  const [duration, setDuration] = useState("")
+  const [onlineResources, setOnlineResources] = useState("")
+  const [linkError, setLinkError] = useState(false)
 
   const showModal = () => {
     setNumber("")
@@ -17,6 +20,9 @@ export default function UnitCreator({ gradeList }) {
     setDescription("")
     setStandard("")
     setVisible(true)
+    setDuration("")
+    setOnlineResources("")
+    setLinkError(false)
   }
 
   const handleCancel = () => {
@@ -93,16 +99,25 @@ export default function UnitCreator({ gradeList }) {
               rows={3}
               onChange={e => setDescription(e.target.value)}
               value={description}
-              placeholder="Enter unit description"
-              required
+              placeholder="Enter unit description (optional)"
             />
           </Form.Item>
-          <Form.Item id="form-label" label="Standards">
+          <Form.Item id="form-label" label="Duration">
             <Input
-              onChange={e => setStandard(e.target.value)}
-              value={standard}
-              placeholder="Enter unit Standards"
-              required
+              onChange={e => setDuration(e.target.value)}
+              value={duration}
+              placeholder="Enter duration of unit (optional)"
+            />
+          </Form.Item>
+          <Form.Item label="Additional Resources">
+            <Input
+              onChange={e => {
+                setOnlineResources(e.target.value)
+                setLinkError(false)
+              }}
+              style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
+              value={onlineResources}
+              placeholder="Enter a link (optional)"
             />
           </Form.Item>
           <Form.Item

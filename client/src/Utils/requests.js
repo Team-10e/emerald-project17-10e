@@ -393,6 +393,8 @@ export const createLessonModule = async (
   number,
   unit,
   standards,
+  bigQuestions,
+  learningObj,
   link
 ) =>
   makeRequest({
@@ -404,13 +406,15 @@ export const createLessonModule = async (
       number,
       unit,
       standards,
+      bigQuestions,
+      learningObj,
       link,
     },
     auth: true,
     error: 'Login failed.',
   });
 
-export const createUnit = async (number, name, standardsID, standardsDescrip, grade) =>
+export const createUnit = async (number, name, standardsID, standardsDescrip, grade, duration, link) =>
   makeRequest({
     method: POST,
     path: `${server}/units`,
@@ -420,6 +424,8 @@ export const createUnit = async (number, name, standardsID, standardsDescrip, gr
       grade: parseInt(grade, 10),
       standards_id: standardsID,
       standards_description: standardsDescrip,
+      duration: duration,
+      link: link
     },
     auth: true,
     error: 'Fail to create new unit.',

@@ -10,7 +10,6 @@ import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
 import { useSearchParams, useParams } from 'react-router-dom';
 import LessonModuleCreator from '../../ContentCreator/LessonModuleCreator/LessonModuleCreator';
 import UnitCreator from '../../ContentCreator/UnitCreator/UnitCreator';
-import UnitEditor from '../../ContentCreator/UnitEditor/UnitEditor';
 
 
 const { TabPane } = Tabs;
@@ -84,7 +83,13 @@ export default function Classroom({
         <TabPane tab="Create Lesson" key="create-lesson">
             <LessonModuleCreator setLessonModuleList={learningStandardList}></LessonModuleCreator>
         </TabPane>
-      </Tabs>
+        <TabPane tab="Edit Units" key="edit-unit">
+          {/* <UnitEditor id={unitID}
+          unitName={unitName}></UnitEditor> */}
+        </TabPane>
+        <TabPane tab="Edit Lessons" key="edit-lesson">
+        </TabPane>
+        </Tabs>
     </div>
   );
 }
