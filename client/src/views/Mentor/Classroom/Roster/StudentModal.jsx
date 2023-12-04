@@ -19,10 +19,10 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
   return (
     <div>
       <button id={linkBtn ? 'link-btn' : null} onClick={showModal}>
-        View
+        {student.name}
       </button>
       <Modal
-        // title={student.name}
+        title={student.name}
         visible={visible}
         onCancel={handleCancel}
         footer={[

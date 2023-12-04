@@ -25,6 +25,8 @@ export default function LessonModuleCreator({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
+  const [bigQuestions, setBigQuestions] = useState("")
+  const [learningObjectives, setLearningObjectives] = useState("")
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
@@ -44,6 +46,8 @@ export default function LessonModuleCreator({
     setDescription("")
     setName("")
     setStandards("")
+    setBigQuestions("")
+    setLearningObjectives("")
     setLink("")
     setLinkError(false)
     setNumOfActivityLevels("")
@@ -70,6 +74,8 @@ export default function LessonModuleCreator({
       0,
       unit,
       standards,
+      bigQuestions,
+      learningObjectives,
       link
     )
     if (res.err) {
@@ -142,7 +148,7 @@ export default function LessonModuleCreator({
                 </option>
               ))}
             </select>
-          </Form.Item>
+            </Form.Item>
           <Form.Item label="Lesson Name">
             <Input
               onChange={e => setName(e.target.value)}
@@ -157,22 +163,12 @@ export default function LessonModuleCreator({
                 setNumOfActivityLevels(e.target.value)
               }}
               required
+              //consider not making activities required
               value={numOfActivityLevels}
               placeholder="Enter number of activities"
               type="number"
               min={1}
               max={10}
-            />
-          </Form.Item>
-          <Form.Item label="Description">
-            <Input.TextArea
-              rows={3}
-              required
-              onChange={e => {
-                setDescription(e.target.value)
-              }}
-              value={description}
-              placeholder="Enter lesson description"
             />
           </Form.Item>
           <Form.Item label="Standards">
@@ -182,10 +178,38 @@ export default function LessonModuleCreator({
               }}
               required
               value={standards}
-              placeholder="Enter lesson Standards"
+              placeholder="Enter lesson standards"
             />
           </Form.Item>
-          <Form.Item label="Additional Resources (Optional)">
+          <Form.Item label="Description">
+            <Input.TextArea
+              rows={3}
+              onChange={e => {
+                setDescription(e.target.value)
+              }}
+              value={description}
+              placeholder="Enter lesson description (optional)"
+            />
+          </Form.Item>
+          <Form.Item label="Big Questions">
+            <Input
+              onChange={e => {
+                setBigQuestions(e.target.value)
+              }}
+              value={bigQuestions}
+              placeholder="Enter big questions (optional)"
+            />
+          </Form.Item>
+          <Form.Item label="Learning Objectives">
+            <Input
+              onChange={e => {
+                setLearningObjectives(e.target.value)
+              }}
+              value={learningObjectives}
+              placeholder="Enter learning objectives (optional)"
+            />
+          </Form.Item>
+          <Form.Item label="Additional Resources">
             <Input
               onChange={e => {
                 setLink(e.target.value)
@@ -193,7 +217,7 @@ export default function LessonModuleCreator({
               }}
               style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
               value={link}
-              placeholder="Enter a link"
+              placeholder="Enter a link (optional)"
             />
           </Form.Item>
           <Form.Item
@@ -204,16 +228,17 @@ export default function LessonModuleCreator({
             style={{ marginBottom: "0px" }}
           >
             <Button
+              type="primary"
               htmlType="submit"
               size="large"
-              id="content-creator-button"
+              className="content-creator-button"
             >
-              Submit
+              Next
             </Button>
             <Button
               onClick={handleCancel}
               size="large"
-              id="content-creator-button"
+              className="content-creator-button"
             >
               Cancel
             </Button>
