@@ -1,13 +1,13 @@
-import { Modal, Button, Checkbox } from 'antd';
+import { Modal, Button, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { getMentor, getClassrooms } from '../../../../Utils/requests';
+import { getMentor, getClassrooms, addStudent } from '../../../../Utils/requests';
 import { message } from 'antd';
 import { useGlobalState } from '../../../../Utils/userState';
 
-export default function ClassroomsModal({ linkBtn, student }) {
+export default function AddClassroomModal({ linkBtn, student }) {
   const [visible, setVisible] = useState(false);
-  const [selectedClassrooms, setSelectedClassrooms] = useState([]);
+  const [selectedClassroom, setSelectedClassroom] = useState([]);
   const [classrooms, setClassrooms] = useState([]);
   const [value] = useGlobalState('currUser');
   const navigate = useNavigate();
@@ -37,56 +37,52 @@ export default function ClassroomsModal({ linkBtn, student }) {
     setVisible(false);
   };
 
-  const handleOk = () => {
-    setVisible(false);
+  const handleOk = async e => {
+    const res = await addStudent(student.name, student.character, selectedClassroom)
+    if (res.err) {
+      message.error(`Fail to add ${student.name} to classroom`)
+    } else {
+      message.success(`Successfully added ${student.name} to classroom`)
+      setVisible(false)
+    }
   };
 
   return (
     <div>
       <button id={linkBtn ? 'link-btn' : null} onClick={showModal}>
-        Classrooms
+        Add to Classroom
       </button>
       <Modal
         visible={visible}
         onCancel={handleCancel}
         footer={[
           <Button key='ok' type='primary' onClick={handleOk}>
-            OK
+            Add to classroom
           </Button>,
         ]}
       >
         <div id='modal-student-card-header'>
           <p id='animal'>{student.character}</p>
-          <h1 id='student-card-title'>{student.name}</h1>
+          <h1 id='student-card-title'>Add {student.name} to another Classroom</h1>
         </div>
         <div id='modal-card-content-container'>
           <div id='description-container'>
-            <p id='label'>Classrooms</p>
-            {classrooms.map((classroom) => (
-              <Checkbox
-                key={classroom.id}
-                style={{ display: 'block' }}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setSelectedClassrooms([
-                      ...selectedClassrooms,
-                      classroom.id,
-                    ]);
-                  } else {
-                    setSelectedClassrooms(
-                      selectedClassrooms.filter(
-                        (id) => id !== classroom.id
-                      )
-                    );
-                  }
-                }}
-              >
-                {classroom.name}
-              </Checkbox>
-            ))}
-            {/* <p id='label-info'>
-              {student.enrolled.enrolled ? 'Enrolled' : 'Unenrolled'}
-            </p> */}
+            <select
+              id="classroom-dropdown"
+              value={selectedClassroom}
+              onChange={e => setSelectedClassroom(e.target.value)}
+              required
+            >
+             {/* <option key={0} value={classroom} id="disabled-option" disabled> */}
+             <option value="" disabled>
+                Select a Classroom
+              </option>
+              {classrooms.map(classroom => (
+                <option key={classroom.id} value={classroom.id}>
+                  {classroom.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </Modal>

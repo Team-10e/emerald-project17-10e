@@ -1,6 +1,6 @@
 import React from 'react';
 import StudentModal from "./StudentModal";
-import ClassroomsModal from "./ClassroomsModal";
+import AddClassroomModal from "./AddClassroomModal";
 
 export default function CardView(props) {
     const {studentData, onEnrollToggle, getFormattedDate} = props;
@@ -27,7 +27,7 @@ export default function CardView(props) {
                     </div>
                 </div>
                 <div id='card-button-container' className='flex flex-row'>
-                    <ClassroomsModal student={student} linkBtn={false} />
+                    <AddClassroomModal student={student} linkBtn={false} />
                     <button onClick={() => {
                         onEnrollToggle(student.enrolled.id, !student.enrolled.enrolled)
                     }}>
