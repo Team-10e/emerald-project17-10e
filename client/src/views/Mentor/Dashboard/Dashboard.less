@@ -22,26 +22,41 @@
 }
 
 #dashboard-card-container {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  justify-content: center;
-  width: 80vw;
-  margin: auto auto auto 2%;
+    //display: inline-grid;
+    display: flex;
+    flex-wrap: wrap;
+    //grid-template-columns: auto auto;
+    //justify-content: center;
+    justify-content: space-between;
+    width: 80vw;
+    //margin: auto auto auto 2%;
+    margin: auto;
 }
 
 #dashboard-class-card {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  width: 24vw;
-  height: auto;
-  margin: auto 6vh 6vh auto;
-  background: #colors[tertiary];
-  color: #colors[text-primary];
-  border: none;
-  border-color: #colors[secondary];
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 23vw;
+    //width: calc(33.33% - 3);
+    height: auto;
+    //margin: auto 6vh 6vh auto;
+    margin: auto auto 4vh auto;
+    //margin-bottom: 3%;
+    background: #colors[tertiary];
+    color: #colors[text-primary];
+    border: none;
+    border-color: #colors[secondary];
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+
+        @media screen and (max-width: 768px){
+        width: calc(50% - 2%);
+        }
+
+        @media screen and (max-width: 480px){
+        width: calc(100% - 2%);
+        }
 
   #card-button-container {
     // margin: 10% auto 0 auto;
