@@ -1,7 +1,7 @@
 import { Modal, Button, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { getMentor, getClassrooms } from '../../../../Utils/requests';
+import { getMentor, getClassrooms, addStudent } from '../../../../Utils/requests';
 import { message } from 'antd';
 import { useGlobalState } from '../../../../Utils/userState';
 
@@ -37,8 +37,14 @@ export default function AddClassroomModal({ linkBtn, student }) {
     setVisible(false);
   };
 
-  const handleOk = () => {
-    setVisible(false);
+  const handleOk = async e => {
+    const res = await addStudent(student.name, student.character, selectedClassroom)
+    if (res.err) {
+      message.error(`Fail to add ${student.name} to classroom`)
+    } else {
+      message.success(`Successfully added ${student.name} to classroom`)
+      setVisible(false)
+    }
   };
 
   return (
