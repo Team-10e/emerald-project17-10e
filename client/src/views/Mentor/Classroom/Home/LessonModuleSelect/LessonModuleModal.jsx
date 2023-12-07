@@ -22,7 +22,7 @@ export default function LessonModuleModal({
   const [activePanel, setActivePanel] = useState('panel-1');
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selected, setSelected] = useState({});
-  const [sharing, setSharing] = useState("");
+  const [sharing, setSharing] = useState("Share");
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams();
 
@@ -102,10 +102,10 @@ export default function LessonModuleModal({
   return (
     <div id='lesson-module-modal'>
       <button id='change-lesson-btn' onClick={showModal}>
-        <p id='test'>Change</p>
+        <p id='test'>Change Lesson</p>
       </button>
-      <button onClick={handleShare}>{sharing}</button>
-      <button id='delete-btn' onClick={handleDelete}>Delete</button>
+      <button id='change-lesson-btn' onClick={handleShare}>{sharing}</button>
+      <button id='change-lesson-btn' onClick={handleDelete}>Delete</button>
 
       <Modal
         title={

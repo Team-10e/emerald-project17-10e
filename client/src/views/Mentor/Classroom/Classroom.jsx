@@ -147,8 +147,17 @@ export default function Classroom({
             <LessonModuleCreator setLessonModuleList={learningStandardList} viewing={viewing} setViewing={viewing}></LessonModuleCreator>
         </TabPane>
         <TabPane tab="Public Lesson" key='public-lesson'>
-         <div>
-                 <select onChange={e => setUnit(e.target.value)}>
+        <div id="page-header">
+          <h2 className="helper">Public Lessons</h2>
+        </div>
+         <div id="div-style">
+          <Form id="add-lesson-module">
+         <Form.Item label="Unit Name">
+          <div style={{
+            paddingBottom: '50px',
+          }}>
+        
+                 <select id="unit-name-dropdown-2" onChange={e => setUnit(e.target.value)}>
               <option key={0} value={unit} id="disabled-option" disabled>
                 Unit
               </option>
@@ -158,18 +167,21 @@ export default function Classroom({
                 </option>
               ))}
               </select>
-            </div>
+              </div>
+              </Form.Item>
+              </Form>
             
             {learningStandardList.map(item => {
               if(item.share) {
                 return(
-                 <div>
-                <li>{item.name}</li>
-                <Button onClick={()=> handleCopy(item, unit)}>Copy {item.name}</Button>
+                 <div id="div-sub-style">
+                  <p id="p-learning-standard">Learning Standard: {item.name}</p>
+                <Button id="copy-button" onClick={()=> handleCopy(item, unit)}>Copy {item.name}</Button>
                 </div> 
                 );
               }
             })}
+            </div>
           
         </TabPane>
       </Tabs>
