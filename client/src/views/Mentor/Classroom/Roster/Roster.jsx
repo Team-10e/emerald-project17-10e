@@ -31,6 +31,7 @@ export default function Roster({ classroomId }) {
             key: student.id,
             name: student.name,
             character: student.character,
+            groupNumber: -1,
             enrolled: {
               id: student.id,
               enrolled: student.enrolled,
@@ -88,6 +89,7 @@ export default function Roster({ classroomId }) {
         key: student.id,
         name: student.name,
         character: student.character,
+        groupNumber: student.groupNumber,
         enrolled: {
           id: student.id,
           enrolled: student.enrolled,
@@ -192,6 +194,8 @@ export default function Roster({ classroomId }) {
           form={form}
           handleDelete={handleDelete}
           getFormattedDate={getFormattedDate}
+          addStudentsToTable={addStudentsToTable}
+          setStudentData={setStudentData}
         />
       ) : (
         <CardView

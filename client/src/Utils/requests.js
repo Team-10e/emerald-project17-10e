@@ -194,11 +194,12 @@ export const updateStudent = async (id, student) =>
       const response = await makeRequest({
         method: PUT,
         path: `${server}/students/${id}`,
-        data: { groupNumber },
+        data: groupNumber,
         auth: true,
         error: 'Failed to update student group.',
       });
-  
+      console.log(id);
+      console.log(groupNumber);
       return response;
     } catch (error) {
       return { err: 'Error updating student group.' };
