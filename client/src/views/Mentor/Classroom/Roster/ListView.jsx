@@ -324,6 +324,38 @@ export default function ListView(props) {
       key: 'groupNumber',
       width: '10%',
       align: 'left',
+      sorter: {
+        compare: (a, b) => a.groupNumber - b.groupNumber,
+      },
+      filters: [
+        {
+          text: 'Not Assigned',
+          value: -1,
+        },
+      ],
+      onFilter: (value, record) => record.groupNumber === value,
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Filter by group number"
+            onChange={(e) => setSelectedKeys(e.target.value ? [parseInt(e.target.value, 10)] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              clearFilters();
+            }}
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Reset
+          </button>
+          <button type="button" onClick={() => confirm()} style={{ width: 90 }}>
+            OK
+          </button>
+        </div>
+      ),
       render: (groupNumber) => (groupNumber !== -1 ? groupNumber : '-'),
     },
     {
