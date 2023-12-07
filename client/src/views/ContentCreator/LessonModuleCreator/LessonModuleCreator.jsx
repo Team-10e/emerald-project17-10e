@@ -55,7 +55,7 @@ export default function LessonModuleCreator({
   }
 
   const handleCancel = () => {
-    setVisible(false)
+    window.location.reload();
   }
 
   const handleSubmit = async () => {
@@ -76,7 +76,7 @@ export default function LessonModuleCreator({
       standards,
       bigQuestions,
       learningObjectives,
-      link
+      link,
     )
     if (res.err) {
       message.error("Fail to create new learning standard")
@@ -87,10 +87,12 @@ export default function LessonModuleCreator({
           message.error("Fail to create activities")
         }
       }
+      window.location.reload();
       message.success("Successfully created lesson")
       const lsRes = await getLessonModuleAll()
       setLessonModuleList(lsRes.data)
       setLessonModuleObj(res.data)
+      
 
       // find the position of the newly created ls
       found = lsRes.data.findIndex(ls => ls.id === res.data.id)
@@ -98,6 +100,7 @@ export default function LessonModuleCreator({
       // set the history so that modal will reopen when
       // user comes back from workspace
       setSearchParams({ tab: "home", activity: res.data.id })
+      
 
       setViewing(res.data.id)
       setVisible(false)
@@ -233,7 +236,7 @@ export default function LessonModuleCreator({
               size="large"
               className="content-creator-button"
             >
-              Next
+              Submit  
             </Button>
             <Button
               onClick={handleCancel}

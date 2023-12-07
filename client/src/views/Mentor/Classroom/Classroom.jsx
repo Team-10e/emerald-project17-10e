@@ -1,8 +1,8 @@
 import {React, useEffect, useState} from 'react';
-import { Tabs } from 'antd';
+import { Dropdown, Table, Tabs } from 'antd';
 import './Classroom.less';
 import { Button, Form, Input, message, Modal } from "antd";
-import { getGrades, getLessonModuleAll } from '../../../Utils/requests';
+import { getGrades, getLessonModuleAll, updateActivityDetails } from '../../../Utils/requests';
 import NavBar from '../../../components/NavBar/NavBar';
 import Roster from './Roster/Roster';
 import Home from './Home/Home';
@@ -10,6 +10,11 @@ import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
 import { useSearchParams, useParams } from 'react-router-dom';
 import LessonModuleCreator from '../../ContentCreator/LessonModuleCreator/LessonModuleCreator';
 import UnitCreator from '../../ContentCreator/UnitCreator/UnitCreator';
+import UnitEditor from '../../ContentCreator/UnitEditor/UnitEditor';
+import Column from 'antd/lib/table/Column';
+import LessonEditor from '../../ContentCreator/LessonEditor/LessonEditor';
+import { createLessonModule, getAllUnits, createActivity} from '../../../Utils/requests';
+import FormItem from 'antd/es/form/FormItem';
 
 
 const { TabPane } = Tabs;
@@ -22,6 +27,9 @@ export default function Classroom({
   const [searchParams, setSearchParams] = useSearchParams();
   const [gradeList, setGradeList] = useState([]);
   const [learningStandardList, setLessonModuleList] = useState([]);
+  const [lesson, setLesson] = useState([]);
+  const [unit, setUnit] = useState("")
+  const [unitList, setUnitList] = useState([])
 
   //gets grade list to display the grades when creating new units
   useEffect(() => {
@@ -39,6 +47,61 @@ export default function Classroom({
     };
     fetchData();
   }, []);
+
+  const handleCopy = async (lesson, unit) => {
+    
+    console.log(unit);
+    console.log(lesson.expectations);
+    console.log(lesson.name);
+    console.log(lesson.standards);
+    console.log(lesson.number);
+    console.log(lesson.link);
+    console.log(lesson.activities.length);
+    const res = await createLessonModule(
+      lesson.expectations,
+      "Copy of " + lesson.name,
+      0,
+      unit,
+    )
+    if (res.err) {
+      message.error("Fail to create new learning standard")
+    } else {
+      const numOfActivityLevels = lesson.activities.length;
+      for (let i = 1; i <= numOfActivityLevels; i++) {
+        const activityRes = await createActivity(i, res.data)
+        if (activityRes.err) {
+          message.error("Fail to create activities")
+        }
+      }
+      for(let i = 0; i < numOfActivityLevels; i++) {
+        const activityRes = await updateActivityDetails(
+          lesson.activities[i].id, 
+          lesson.activities[i].description,
+          lesson.activities[i].StandardS,
+        )
+        updateActivityDetails()
+      }
+      message.success("Successfully created lesson")
+      const lsRes = await getLessonModuleAll()
+      setLessonModuleList(lsRes.data)
+
+      // find the position of the newly created ls
+      found = lsRes.data.findIndex(ls => ls.id === res.data.id)
+      found = Math.ceil(found / 10)
+      // set the history so that modal will reopen when
+      // user comes back from workspace
+      setSearchParams({ tab: "home", activity: res.data.id })
+    }
+    
+  }
+
+  useEffect(() => {
+    const getUnits = async () => {
+      const res = await getAllUnits()
+      setUnitList(res.data)
+    }
+    getUnits()
+  }, [])
 
 
 
@@ -81,15 +144,35 @@ export default function Classroom({
           <UnitCreator gradeList={gradeList}></UnitCreator>
         </TabPane> 
         <TabPane tab="Create Lesson" key="create-lesson">
-            <LessonModuleCreator setLessonModuleList={learningStandardList}></LessonModuleCreator>
+            <LessonModuleCreator setLessonModuleList={learningStandardList} viewing={viewing} setViewing={viewing}></LessonModuleCreator>
         </TabPane>
-        <TabPane tab="Edit Units" key="edit-unit">
-          {/* <UnitEditor id={unitID}
-          unitName={unitName}></UnitEditor> */}
+        <TabPane tab="Public Lesson" key='public-lesson'>
+         <div>
+                 <select onChange={e => setUnit(e.target.value)}>
+              <option key={0} value={unit} id="disabled-option" disabled>
+                Unit
+              </option>
+              {unitList.map(unit_ => (
+                <option key={unit_.id} value={unit_.id}>
+                  {unit_.name}
+                </option>
+              ))}
+              </select>
+            </div>
+            
+            {learningStandardList.map(item => {
+              if(item.share) {
+                return(
+                 <div>
+                <li>{item.name}</li>
+                <Button onClick={()=> handleCopy(item, unit)}>Copy {item.name}</Button>
+                </div> 
+                );
+              }
+            })}
+          
         </TabPane>
-        <TabPane tab="Edit Lessons" key="edit-lesson">
-        </TabPane>
-        </Tabs>
+      </Tabs>
     </div>
   );
 }

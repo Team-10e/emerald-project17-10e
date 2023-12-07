@@ -27,6 +27,7 @@ export default function UnitCreator({ gradeList }) {
 
   const handleCancel = () => {
     setVisible(false)
+    window.location.reload();
   }
 
   const handleSubmit = async e => {
@@ -36,6 +37,7 @@ export default function UnitCreator({ gradeList }) {
     } else {
       message.success("Successfully created unit")
       setVisible(false)
+      window.location.reload();
     }
   }
 

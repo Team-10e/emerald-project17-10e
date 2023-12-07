@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal, Popconfirm } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
@@ -151,6 +151,12 @@ const MentorActivityDetailModal = ({
     setVisible(true)
     //setOpen(true)
 };
+
+const handleDelete = () => {
+  deleteActivity(selectActivity.id);
+  message.success('Deleted Activity');
+  setVisible(false);
+}
 //this is the page for delete lessons
   return (
     <div id="mentoredit">
@@ -299,7 +305,8 @@ const MentorActivityDetailModal = ({
           </Button>
         </Form.Item>
       </Form>
-      <Button id="delete-activity" onClick={() => deleteActivity(selectActivity.id)}>Delete</Button>
+      <Button id="delete-activity" onClick={() => handleDelete()}>Delete
+      </Button>
     </Modal>
     </div>
   )

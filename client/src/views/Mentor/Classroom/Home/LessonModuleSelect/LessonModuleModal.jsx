@@ -8,6 +8,7 @@ import {
 } from '../../../../../Utils/requests';
 import { useSearchParams } from 'react-router-dom';
 import UnitCreator from '../../../../ContentCreator/UnitEditor/UnitEditor';
+import { deleteLessonModule, updateLessonModule } from '../../../../../Utils/requests';
 
 export default function LessonModuleModal({
   setActiveLessonModule,
@@ -21,6 +22,7 @@ export default function LessonModuleModal({
   const [activePanel, setActivePanel] = useState('panel-1');
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selected, setSelected] = useState({});
+  const [sharing, setSharing] = useState("");
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams();
 
@@ -30,6 +32,12 @@ export default function LessonModuleModal({
         const res = await getLessonModule(viewing);
         if (res.data) {
           setSelected(res.data);
+          if(selected.share) {
+            setSharing("Stop Sharing");
+          }
+          else {
+            setSharing("Share");
+          }
           const activitiesRes = await getLessonModuleActivities(res.data.id);
           if (activitiesRes) setSelectedActivities(activitiesRes.data);
           else {
@@ -73,11 +81,32 @@ export default function LessonModuleModal({
     setActivePanel('panel-2');
   };
 
+  const handleDelete = async () => {
+    deleteLessonModule(selected.id);
+    setActiveLessonModule();
+    setActivities(selectedActivities);
+    message.success('Deleted Lesson');
+  };
+
+  const handleShare = async () => {
+    if(selected.share) {
+      updateLessonModule(selected.id, selected.name, selected.expectations, selected.standards, selected.link, 0);
+      setSharing("Share");
+    }
+    else {
+      updateLessonModule(selected.id, selected.name, selected.expectations, selected.standards, selected.link, 1);
+      setSharing("Stop sharing");
+    }
+  }
+
   return (
     <div id='lesson-module-modal'>
       <button id='change-lesson-btn' onClick={showModal}>
         <p id='test'>Change</p>
       </button>
+      <button onClick={handleShare}>{sharing}</button>
+      <button id='delete-btn' onClick={handleDelete}>Delete</button>
+
       <Modal
         title={
           activePanel === 'panel-1'
@@ -96,11 +125,11 @@ export default function LessonModuleModal({
           >
             {activePanel === 'panel-1'
               ? 'Review'
-              : 'Edit'}
+              : 'Set as Active Learning Standard'}
           </Button>,
         ]}
       >
-      <LessonModuleSelect
+        <LessonModuleSelect
           activePanel={activePanel}
           setActivePanel={setActivePanel}
           selected={selected}
@@ -108,9 +137,8 @@ export default function LessonModuleModal({
           gradeId={gradeId}
           activities={selectedActivities}
           setActivities={setSelectedActivities}
-        />   
+        />
       </Modal>
-      
     </div>
   );
 }

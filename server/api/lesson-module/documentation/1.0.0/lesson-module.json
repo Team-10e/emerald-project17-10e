@@ -647,6 +647,9 @@
           },
           "link": {
             "type": "string"
+          },
+          "share": {
+            "type": "boolean"
           }
         }
       },
@@ -679,6 +682,9 @@
           },
           "link": {
             "type": "string"
+          },
+          "share": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

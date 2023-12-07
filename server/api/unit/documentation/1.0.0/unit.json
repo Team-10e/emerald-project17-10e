@@ -604,6 +604,9 @@
                 "link": {
                   "type": "string"
                 },
+                "share": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },

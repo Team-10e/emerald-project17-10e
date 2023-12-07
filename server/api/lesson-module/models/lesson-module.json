@@ -36,6 +36,9 @@
     },
     "link": {
       "type": "string"
+    },
+    "share": {
+      "type": "boolean"
     }
   }
 }
