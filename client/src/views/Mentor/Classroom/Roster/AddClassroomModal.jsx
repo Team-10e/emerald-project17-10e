@@ -1,3 +1,6 @@
+// Modal to add a student to another classroom
+// Duplicates student into the other classroom
+
 import { Modal, Button, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -61,6 +64,8 @@ export default function AddClassroomModal({ linkBtn, student }) {
           </Button>,
         ]}
       >
+
+        {/* Dropdown selection */}
         <div id='modal-student-card-header'>
           <p id='animal'>{student.character}</p>
           <h1 id='student-card-title'>Add {student.name} to another Classroom</h1>
@@ -73,7 +78,6 @@ export default function AddClassroomModal({ linkBtn, student }) {
               onChange={e => setSelectedClassroom(e.target.value)}
               required
             >
-             {/* <option key={0} value={classroom} id="disabled-option" disabled> */}
              <option value="" disabled>
                 Select a Classroom
               </option>
