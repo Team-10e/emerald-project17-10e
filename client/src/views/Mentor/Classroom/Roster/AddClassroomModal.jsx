@@ -1,18 +1,16 @@
 // Modal to add a student to another classroom
 // Duplicates student into the other classroom
 
-import { Modal, Button, Form } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { getMentor, getClassrooms, addStudent } from '../../../../Utils/requests';
-import { message } from 'antd';
 import { useGlobalState } from '../../../../Utils/userState';
 
 export default function AddClassroomModal({ linkBtn, student }) {
   const [visible, setVisible] = useState(false);
   const [selectedClassroom, setSelectedClassroom] = useState([]);
   const [classrooms, setClassrooms] = useState([]);
-  const [value] = useGlobalState('currUser');
   const navigate = useNavigate();
 
   useEffect(() => {
