@@ -5,7 +5,6 @@ import { Modal, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { getMentor, getClassrooms, addStudent } from '../../../../Utils/requests';
-import { useGlobalState } from '../../../../Utils/userState';
 
 export default function AddClassroomModal({ linkBtn, student }) {
   const [visible, setVisible] = useState(false);
