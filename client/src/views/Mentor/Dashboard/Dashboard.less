@@ -22,30 +22,44 @@
 }
 
 #dashboard-card-container {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  justify-content: center;
-  width: 80vw;
-  margin: auto auto auto 2%;
+    // Establishes a flex container for the card containers
+    display: flex;
+    // Allows flex container to wrap items onto multiple lines if needed
+    flex-wrap: wrap;
+    // Ensures there is equal spacing between the cards
+    justify-content: space-between;
+    width: 80vw;
+    // Center the cards
+    margin: auto;
 }
 
 #dashboard-class-card {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  width: 24vw;
-  height: auto;
-  margin: auto 6vh 6vh auto;
-  background: #colors[tertiary];
-  color: #colors[text-primary];
-  border: none;
-  border-color: #colors[secondary];
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 23vw;
+    height: auto;
+    // Best spacing setting fow when the tab is moved to a half tab
+    margin: auto auto 4vh auto;
+    background: #colors[tertiary];
+    color: #colors[text-primary];
+    border: none;
+    border-color: #colors[secondary];
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+
+        // Adjust the cards based on the screen width for it to be dynamic
+
+        // Full screen
+        @media screen and (max-width: 768px){
+        width: calc(50% - 2%);
+        }
+        // Half Screen or less
+        @media screen and (max-width: 480px){
+        width: calc(100% - 2%);
+        }
 
   #card-button-container {
-    // margin: 10% auto 0 auto;
-
     button {
       width: 9vw;
       height: auto;

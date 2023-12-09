@@ -11,7 +11,7 @@ module.exports = {
         const students = await strapi.services.student.find({id: ids}, [])
 
         // return the students and the current session
-        return {
+        return {    
             session,
             students: students.map(student => sanitizeEntity(student, {model: strapi.models.student}))
         }
@@ -77,7 +77,7 @@ module.exports = {
                     name: student.name,
                     character: student.character,
                     classroom: classroom,
-                    groupNumber: groupNumber
+                    groupNumber: student.groupNumber
                 })
             }))
         }

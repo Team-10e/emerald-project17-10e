@@ -6,6 +6,7 @@ import AddClassroomModal from "./AddClassroomModal";
 import Picker from 'emoji-picker-react';
 import { updateStudent, updateStudentGroup } from '../../../../Utils/requests';
 import { message } from 'antd';
+import { setUserSession } from '../../../../Utils/AuthRequests';
 
 export default function ListView(props) {
   const {
@@ -19,6 +20,8 @@ export default function ListView(props) {
     save,
     form,
     getFormattedDate,
+    addStudentsToTable,
+    setStudentData,
   } = props;
 
   const [chosenCharacter, setChosenCharacter] = useState('');
@@ -112,7 +115,7 @@ export default function ListView(props) {
     setChosenCharacter('');
     setPickerVisible(false);
   };
-  const handleGroupAssignment = async (record) => {
+ /* const handleGroupAssignment = async (record) => {
     const groupNumberInput = prompt(`Enter group number for ${record.name}:`);
     const groupNumber = parseInt(groupNumberInput);
     if (!isNaN(groupNumber) && Number.isInteger(groupNumber)) {
@@ -120,8 +123,13 @@ export default function ListView(props) {
         ...record,
         groupNumber: groupNumber,
       };
+
+      console.log(record);
+      console.log(updatedStudent);
       const res = await updateStudentGroup(record.key, updatedStudent);
+      //const res =await updateStudent(record.key, record);
       if (res.data) {
+        updateStudent(updatedStudent);
         message.success(`Successfully assigned ${res.data.name} to group ${groupNumber}.`);
         console.log(studentData);
       } else {
@@ -131,7 +139,45 @@ export default function ListView(props) {
       alert('Please enter a valid integer for the group number.');
     }
     //alert("test");
-  };
+  }; */
+  const handleGroupAssignment = async (record) => {
+    const id = record.key;
+    const groupNumberInput = prompt(`Enter group number for ${record.name}:`);
+    const groupNumber = parseInt(groupNumberInput);
+    console.log(record);
+    console.log(record.key);
+    record.enrolled = true;
+    record.groupNumber = groupNumber;
+    console.log(record);
+    const res = await updateStudentGroup(record.key, record);
+    console.log("this is res");
+    console.log(res.data);
+    if (res.data) {
+      const updatedStudent = record;
+      let newStudentData = [...studentData];
+      const index = studentData.findIndex(function (student) {
+        return student.key === id;
+      });
+      newStudentData[index] = {
+        key: updatedStudent.key,
+        name: updatedStudent.name,
+        character: updatedStudent.character,
+        groupNumber: updatedStudent.groupNumber,
+        enrolled: {
+          id: updatedStudent.key,
+          enrolled: updatedStudent.enrolled,
+        },
+        last_logged_in: updatedStudent.last_logged_in,
+      };
+      setStudentData(newStudentData);
+      message.success(
+        `Successfully updated ${updatedStudent.name}'s  group number.`
+      );
+    } else {
+      message.error(res.err);
+    }
+  }
+
 
   const columns = [
     {
@@ -278,7 +324,39 @@ export default function ListView(props) {
       key: 'groupNumber',
       width: '10%',
       align: 'left',
-      render: (groupNumber) => (groupNumber !== undefined ? groupNumber : '-'),
+      sorter: {
+        compare: (a, b) => a.groupNumber - b.groupNumber,
+      },
+      filters: [
+        {
+          text: 'Not Assigned',
+          value: -1,
+        },
+      ],
+      onFilter: (value, record) => record.groupNumber === value,
+      filterDropdown: ({ setSelectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Filter by group number"
+            onChange={(e) => setSelectedKeys(e.target.value ? [parseInt(e.target.value, 10)] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              clearFilters();
+            }}
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Reset
+          </button>
+          <button type="button" onClick={() => confirm()} style={{ width: 90 }}>
+            OK
+          </button>
+        </div>
+      ),
+      render: (groupNumber) => (groupNumber !== -1 ? groupNumber : '-'),
     },
     {
       title: 'Assign Group',
