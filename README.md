@@ -141,5 +141,16 @@ Before submitting a pull request, rebase the feature branch into the target bran
 - PRs to **master** should squash and merge
 - PRs to all other branches should create a merge commit
 
-  ### TEAM 10E
+### TEAM 10E
+- Features added
+  - Lesson and unit creation for teachers
+  ![Screenshot 2023-12-12 123056](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/65147a8c-7ff0-456f-aec2-a3d9bed2b5c8)  
+  - Classroom group making
+  - U/I enhancements
+  - Adding and removing students to classrooms
+  - Public lesson sharing and copying of public lessons
+  - Emoji password creation
+  - Activity and lesson deletion
+  - Edit Unit/Lessons 
+
 
