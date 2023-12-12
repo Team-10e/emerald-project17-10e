@@ -144,13 +144,36 @@ Before submitting a pull request, rebase the feature branch into the target bran
 ### TEAM 10E
 - Features added
   - Lesson and unit creation for teachers
-  ![Screenshot 2023-12-12 123056](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/65147a8c-7ff0-456f-aec2-a3d9bed2b5c8)  
+  ![Screenshot 2023-12-12 123725](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/55e079bc-7dca-4acf-8e62-3e0fe5c9c90f)
   - Classroom group making
+  ![Screenshot 2023-12-12 123939](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/4f84822d-3339-4d20-9857-4975a250a076)
   - U/I enhancements
+  ![Screenshot 2023-12-12 124121](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/8141268c-884c-4382-bc83-4440640ec9b3)
+  ![Screenshot 2023-12-12 124834](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/17d6c98b-7285-4605-a622-c6d918819d5a)
   - Adding and removing students to classrooms
+  ![Screenshot 2023-12-12 125100](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/f6b08c14-604a-4161-b8f6-2f5e47f9f87a)
   - Public lesson sharing and copying of public lessons
+  ![Screenshot 2023-12-12 125221](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/c98576a1-2a1e-4fa5-b68b-a6fa341be79d)
   - Emoji password creation
+  ![Screenshot 2023-12-12 125318](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/c093f5d5-2c2e-4852-99bc-29276ec5c7fb)
   - Activity and lesson deletion
-  - Edit Unit/Lessons 
+  ![Screenshot 2023-12-12 125433](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/9f1f8e2a-d211-4a46-9a41-baa0988e0bfd)
+  
+  Other than the steps above yarn install in client must be run again in order for the emoji password library to work correctly.
+
+  For updating the database, the teacher manager role must be updated in order to find, delete, update, and create both units and lessons. The teacher manager must also be able to find grades in order for dropdowns to   
+  work correctly. The lesson-module must to updated with fields for a boolean to store share data and then a text field for the big question and the unit must also be updated to contain the new duration text field.   
+  Finally in order to have the group assignments work properly, a new number field for students must be made.
+
+  - Outstanding Work
+    - Lesson sharing bugs for some of the units
+    - Edit lessons and units
+    - Veiwing students progress from within roster
+
+
+
+
+
+
 
 
