@@ -50,7 +50,7 @@ The development environment is composed of five servers. The first one is run wi
 `casmm-client-dev`
 
 1. Follow the [client](/client#setup) setup
-2. Run `yarn start` from `/client`
+2. Run `yarn install`, then `yarn start` from `/client`
 
 `casmm-server-dev`, `casmm-compile-dev`, `casmm-db-dev`, and `casmm-compile_queue-dev`
 
@@ -159,7 +159,7 @@ Before submitting a pull request, rebase the feature branch into the target bran
   - Activity and lesson deletion
   ![Screenshot 2023-12-12 125433](https://github.com/Team-10e/emerald-project17-10e/assets/92892486/9f1f8e2a-d211-4a46-9a41-baa0988e0bfd)
   
-  Other than the steps above yarn install in client must be run again in order for the emoji password library to work correctly.
+  Other than the steps above, yarn install in client must be run in order for the emoji password library to work correctly.
 
   For updating the database, the teacher manager role must be updated in order to find, delete, update, and create both units and lessons. The teacher manager must also be able to find grades in order for dropdowns to   
   work correctly. The lesson-module must to updated with fields for a boolean to store share data and then a text field for the big question and the unit must also be updated to contain the new duration text field.   
